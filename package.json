@@ -1,0 +1,61 @@
+{
+  "name": "hel-tpl-remote-vue3-comps-vite",
+  "appGroupName": "hel-tpl-remote-vue3-comps-vite",
+  "version": "0.0.4",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "build": "npm run check_name && npm run build_dist && npm run build_meta && npm run build_proxy",
+    "build_dist": "vite build",
+    "check_name": "node ./scripts/check.mjs",
+    "build_proxy": "npm run build_proxy_umd && npm run build_proxy_es && cp ./hel_proxy/entry.js ./hel_dist",
+    "build_proxy_umd": "rollup -c",
+    "build_proxy_es": "cross-env BUILD_ENV=es rollup -c",
+    "build_cust": "npm run set_home_page \"npm run build && npm run build_meta\"",
+    "set_home_page": "cross-env-shell HEL_APP_HOME_PAGE=http://127.0.0.1:9001",
+    "build_meta": "node scripts/meta.mjs",
+    "prepublishOnly": "node ./scripts/prepublishOnly.cjs"
+  },
+  "files": [
+    "hel_dist",
+    "hel_proxy",
+    "hel_proxy_es",
+    "scripts",
+    "README.md",
+    "src"
+  ],
+  "dependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "cross-env": "^7.0.3",
+    "hel-dev-utils": "^4.3.23",
+    "hel-iso": "^4.4.0",
+    "hel-lib-proxy": "^4.9.1",
+    "i": "^0.3.7",
+    "npm": "^10.8.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "tdesign-vue-next": "^1.9.9",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "npm-run-all2": "^6.2.0",
+    "prettier": "^3.2.5",
+    "typescript": "~5.4.0",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
+  }
+}
